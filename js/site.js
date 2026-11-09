@@ -239,7 +239,9 @@ function bindForms() {
         form.hidden = true;
         const done = form.parentElement.querySelector(".success");
         done.hidden = false;
-        done.innerHTML = "<h3>Request received</h3><p>Saved for the desk. A booking is confirmed only when the outlet calls you back.</p>";
+        done.innerHTML = form.dataset.form === "corporate"
+          ? "<h3>Request received</h3><p>Saved for the desk. A booking is confirmed only when the outlet calls you back.</p>"
+          : "<h3>Thank you</h3><p>We’ll get back to you as quickly as we can.</p>";
       } catch {
         error.textContent = "We couldn't save that. Try again in a moment.";
         button.disabled = false;

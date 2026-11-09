@@ -302,6 +302,7 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 560; letter-spacing: -0
 }
 .enquiry h2 { font-size: 52px; color: var(--gold); }
 form[data-enquiry] { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+form[data-enquiry][hidden] { display: none; }
 .enquiry form[data-enquiry] { grid-template-columns: 1fr; max-width: 520px; }
 form[data-enquiry] label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
 form[data-enquiry] label.wide { grid-column: 1 / -1; }
