@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desk — Jollygunj</title>
+  <link rel="icon" href="../images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@380;520&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="../index.html"><img src="../images/logo.svg" alt="Jollygunj"></a>
+    <p class="admin-mark">Desk</p>
+    <button class="btn ghost" id="sign-out" type="button" hidden>Sign out</button>
+  </header>
+  <main class="section admin">
+    <section id="login" class="panel admin-login">
+      <p class="eyebrow">House login</p>
+      <h2>Enquiries</h2>
+      <form id="login-form">
+        <p class="error" id="login-error" role="alert"></p>
+        <label>Email<input name="email" type="email" autocomplete="username" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+        <button class="btn" type="submit">Sign in</button>
+      </form>
+    </section>
+    <section id="desk" hidden>
+      <div class="admin-bar">
+        <div>
+          <p class="eyebrow">Saved forms</p>
+          <h2>Every enquiry</h2>
+        </div>
+        <button class="btn" id="new-enquiry" type="button">New enquiry</button>
+      </div>
+      <div class="filters" id="type-filters">
+        <button type="button" data-type="all" aria-pressed="true">All</button>
+        <button type="button" data-type="corporate" aria-pressed="false">Corporate</button>
+        <button type="button" data-type="contact" aria-pressed="false">Contact</button>
+        <button type="button" data-type="rent" aria-pressed="false">Rent</button>
+      </div>
+      <p class="error" id="desk-error" role="alert"></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Received</th>
+              <th>Form</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>About</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="empty" hidden>No enquiries in this view.</p>
+    </section>
+  </main>
+  <dialog id="editor">
+    <form id="editor-form" class="panel">
+      <h3 id="editor-title">Enquiry</h3>
+      <p class="error" id="editor-error" role="alert"></p>
+      <label>Form
+        <select name="form_type" required>
+          <option value="corporate">Corporate</option>
+          <option value="contact">Contact</option>
+          <option value="rent">Rent</option>
+        </select>
+      </label>
+      <label>Status
+        <select name="status" required>
+          <option value="new">New</option>
+          <option value="in_progress">In progress</option>
+          <option value="closed">Closed</option>
+        </select>
+      </label>
+      <label>Name *<input name="name" required></label>
+      <label>Phone *<input name="phone" required></label>
+      <label>Email<input name="email" type="email"></label>
+      <label>Outlet<input name="outlet"></label>
+      <label>Package<input name="package"></label>
+      <label>Date<input name="event_date" type="date"></label>
+      <label>Time<input name="event_time"></label>
+      <label>Attendees<input name="attendees" type="number" min="1"></label>
+      <label>Locality<input name="locality"></label>
+      <label>Area<input name="area"></label>
+      <label class="wide">Message<textarea name="message" rows="4"></textarea></label>
+      <div class="editor-actions">
+        <button class="btn line" type="button" id="cancel-edit">Cancel</button>
+        <button class="btn" type="submit">Save</button>
+      </div>
+    </form>
+  </dialog>
+  <script type="module" src="../js/admin.js"></script>
+</body>
+</html>

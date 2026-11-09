@@ -173,14 +173,26 @@ function renderGallery() {
   paint();
 }
 
+const SUPABASE_URL = "https://slrxicewyufjpsggvcwy.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNscnhpY2V3eXVmanBzZ2d2Y3d5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQxOTc4MzgsImV4cCI6MjEwOTc3MzgzOH0.hUNm2ZwoMk1q3iyAE47X9OM3C7iJqLTPH1BiDDezJB8";
+
 function bindForms() {
-  document.querySelectorAll("form[data-enquiry]").forEach((form) => {
-    form.addEventListener("submit", (event) => {
+  const forms = document.querySelectorAll("form[data-enquiry]");
+  if (!forms.length) return;
+  let clientPromise;
+  const client = () => {
+    clientPromise ??= import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm")
+      .then(({ createClient }) => createClient(SUPABASE_URL, SUPABASE_ANON_KEY));
+    return clientPromise;
+  };
+  forms.forEach((form) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const error = form.querySelector(".error");
       const data = Object.fromEntries(new FormData(form).entries());
       const phone = String(data.phone || "").replace(/\D/g, "");
       const missing = [...form.querySelectorAll("[required]")].filter((field) => !String(field.value).trim());
+      const button = form.querySelector("button[type=submit]");
       if (missing.length || phone.length < 10) {
         error.textContent = phone.length < 10 && data.phone
           ? "Enter a 10-digit phone number."
@@ -196,14 +208,37 @@ function bindForms() {
         return;
       }
       error.textContent = "";
-      const summary = Object.entries(data)
-        .filter(([, value]) => String(value).trim())
-        .map(([key, value]) => `<li><strong>${key}</strong> — ${value}</li>`)
-        .join("");
-      form.hidden = true;
-      const done = form.parentElement.querySelector(".success");
-      done.hidden = false;
-      done.innerHTML = `<h3>Request received</h3><p>This stays on this browser. A real booking is confirmed only when the outlet calls you back.</p><ul>${summary}</ul>`;
+      button.disabled = true;
+      const blank = (value) => {
+        const text = String(value || "").trim();
+        return text || null;
+      };
+      try {
+        const supabase = await client();
+        const { error: insertError } = await supabase.from("enquiries").insert({
+          form_type: form.dataset.form,
+          name: String(data.name).trim(),
+          phone,
+          email: blank(data.email),
+          outlet: blank(data.location || data.outlet),
+          package: blank(data.package),
+          event_date: blank(data.date),
+          event_time: blank(data.time),
+          attendees: data.attendees ? Number(data.attendees) : null,
+          locality: blank(data.locality),
+          area: blank(data.area),
+          message: blank(data.message || data.property),
+          status: "new",
+        }, { returning: "minimal" });
+        if (insertError) throw insertError;
+        form.hidden = true;
+        const done = form.parentElement.querySelector(".success");
+        done.hidden = false;
+        done.innerHTML = "<h3>Request received</h3><p>Saved for the desk. A booking is confirmed only when the outlet calls you back.</p>";
+      } catch {
+        error.textContent = "We couldn't save that. Try again in a moment.";
+        button.disabled = false;
+      }
     });
   });
 }

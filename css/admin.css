@@ -1,0 +1,63 @@
+.admin-mark {
+  margin: 0 auto 0 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+.admin { max-width: 1180px; }
+.admin-login { max-width: 440px; }
+.admin-login h2, .admin-bar h2 { font-size: 48px; }
+.admin-login form, #editor-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+.admin-login label, #editor-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.admin-login input, #editor-form input, #editor-form select, #editor-form textarea {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.admin-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.table-wrap {
+  overflow-x: auto;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+td { font-size: 15px; }
+.about { color: var(--muted); max-width: 280px; }
+.row-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.row-actions button, .status-select {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 999px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.status-select.new { background: var(--sand); }
+.status-select.in_progress { background: #efe4ff; }
+.status-select.closed { background: #e7f3e4; }
+#editor { width: min(720px, 94vw); }
+#editor-form { margin: 0; display: grid; grid-template-columns: 1fr 1fr; }
+#editor-form h3, #editor-form .error, #editor-form .wide, #editor-form .editor-actions { grid-column: 1 / -1; }
+.editor-actions { display: flex; justify-content: flex-end; gap: 8px; }
+#desk-error:empty, #login-error:empty, #editor-error:empty { display: none; }
