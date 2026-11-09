@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery — Jollygunj</title>
+  <meta name="description" content="Jollygunj rooms and plates at J P Nagar, Whitefield, and Yelahanka.">
+  <link rel="icon" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,640&family=Outfit:wght@380;520;580&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="gallery">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="images/logo.svg" alt="Jollygunj"></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav">
+      <a href="index.html" data-page="home">Home</a>
+      <a href="menu.html" data-page="menu">The Menu</a>
+      <a href="corporate.html" data-page="corporate">Corporate Parties</a>
+      <a href="events.html" data-page="events">Events</a>
+      <a href="gallery.html" data-page="gallery">Gallery</a>
+      <a href="rent.html" data-page="rent">Rent/Lease</a>
+      <a href="contact.html" data-page="contact">Contact</a>
+    </nav>
+  </header>
+  <main id="main" class="section">
+    <div class="section-head">
+      <p class="eyebrow">Gallery</p>
+      <h2>Pick a room, then a frame</h2>
+      <p>The published plate photography lives with J P Nagar today. Whitefield and Yelahanka have their room shots here, plus the shared card. Click a frame to open it.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Outlet">
+      <button type="button" data-outlet="all" aria-pressed="true">All outlets</button>
+      <button type="button" data-outlet="jp">J P Nagar</button>
+      <button type="button" data-outlet="wf">Whitefield</button>
+      <button type="button" data-outlet="yl">Yelahanka</button>
+    </div>
+    <div class="filters" role="group" aria-label="Kind">
+      <button type="button" data-kind="all" aria-pressed="true">All</button>
+      <button type="button" data-kind="venue">Venue</button>
+      <button type="button" data-kind="drinks">Drinks</button>
+      <button type="button" data-kind="kitchen">Kitchen</button>
+    </div>
+    <div id="gallery-root" class="gallery-grid"></div>
+  </main>
+  <dialog id="lightbox">
+    <img alt="">
+    <form method="dialog"><button class="btn dark" type="submit">Close</button></form>
+  </dialog>
+  <footer class="site-footer">
+    <div><img src="images/logo.svg" alt="" width="64"><p>A Byg Ventures LLP bar.</p></div>
+    <div><p class="footer-label">Visit</p><a href="contact.html">Contact</a></div>
+    <div><p class="footer-label">Plan</p><a href="corporate.html">Corporate parties</a><a href="careers.html">Careers</a></div>
+    <div><p class="footer-label">House notes</p><a href="disclaimer.html">Disclaimer</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+    <p class="legal-line">© <span data-year>2026</span> Jollygunj</p>
+  </footer>
+  <script src="js/site.js"></script>
+</body>
+</html>

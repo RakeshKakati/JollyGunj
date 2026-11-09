@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Jollygunj</title>
+  <meta name="description" content="Contact Jollygunj at J P Nagar, Whitefield, and Yelahanka.">
+  <link rel="icon" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,640&family=Outfit:wght@380;520;580&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="contact">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="images/logo.svg" alt="Jollygunj"></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav">
+      <a href="index.html" data-page="home">Home</a>
+      <a href="menu.html" data-page="menu">The Menu</a>
+      <a href="corporate.html" data-page="corporate">Corporate Parties</a>
+      <a href="events.html" data-page="events">Events</a>
+      <a href="gallery.html" data-page="gallery">Gallery</a>
+      <a href="rent.html" data-page="rent">Rent/Lease</a>
+      <a href="contact.html" data-page="contact">Contact</a>
+    </nav>
+  </header>
+  <main id="main" class="section">
+    <div class="section-head">
+      <p class="eyebrow">Contact</p>
+      <h2>Three rooms, one desk</h2>
+      <p>The live site publishes a phone only for J P Nagar. Whitefield and Yelahanka are on the map and on delivery apps. Yelahanka’s public listing carries a mobile. No outlet email is published, so this form is the written path. It confirms on this page. It does not send mail by itself.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <article class="panel address" id="jp">
+          <h3>J P Nagar</h3>
+          <p>3rd floor, 71, 15th Cross, Outer Ring Road, 3rd Phase, J. P. Nagar, Bengaluru 560078</p>
+          <p><a href="tel:08047363388">080-47363388</a></p>
+          <div class="branch-cta">
+            <div class="cta-row">
+              <a class="cta" href="https://www.zomato.com/bangalore/jollygunj-jp-nagar-bangalore" target="_blank" rel="noopener">Delivery</a>
+              <a class="cta" href="https://maps.app.goo.gl/inhUzgAn8zNTjrC27" target="_blank" rel="noopener">Directions</a>
+            </div>
+            <a class="cta cta-wide" href="https://widget.reservego.co/reserveBrands/6732094bdb478b447e780446?source=9" target="_blank" rel="noopener">Reserve a Table</a>
+          </div>
+        </article>
+        <article class="panel address" id="whitefield">
+          <h3>Whitefield</h3>
+          <p>Plot 167, Whitefield Main Road, Palm Meadows, Varthur Kodi, Bengaluru</p>
+          <p class="note">No public phone on jollygunj.com. Reserve or use the form.</p>
+          <div class="branch-cta">
+            <div class="cta-row">
+              <a class="cta" href="https://www.zomato.com/bangalore/jollygunj-whitefield-bangalore" target="_blank" rel="noopener">Delivery</a>
+              <a class="cta" href="https://maps.app.goo.gl/tLW68WNuWnp86tnj6" target="_blank" rel="noopener">Directions</a>
+            </div>
+            <a class="cta cta-wide" href="https://widget.reservego.co/reserveBrands/6732094bdb478b447e780446?source=9" target="_blank" rel="noopener">Reserve a Table</a>
+          </div>
+        </article>
+        <article class="panel address" id="yelahanka">
+          <h3>Yelahanka</h3>
+          <p>3rd floor, RMZ Galleria, SH9, Ambedkar Colony, Bengaluru 560064</p>
+          <p><a href="tel:+919980209201">+91 99802 09201</a></p>
+          <p class="note">Number from the public place listing, not from jollygunj.com.</p>
+          <div class="branch-cta">
+            <div class="cta-row">
+              <a class="cta" href="https://www.zomato.com/bangalore/jollygunj-yelahanka-bangalore" target="_blank" rel="noopener">Delivery</a>
+              <a class="cta" href="https://maps.app.goo.gl/dFHnbCZiakJavdvt7" target="_blank" rel="noopener">Directions</a>
+            </div>
+            <a class="cta cta-wide" href="https://widget.reservego.co/reserveBrands/6732094bdb478b447e780446?source=9" target="_blank" rel="noopener">Reserve a Table</a>
+          </div>
+        </article>
+      </div>
+      <div class="panel">
+        <h3>Write to us</h3>
+        <form data-enquiry>
+          <p class="error" role="alert"></p>
+          <label class="wide">Name *<input name="name" required autocomplete="name"></label>
+          <label class="wide">Phone *<input name="phone" required inputmode="tel" autocomplete="tel"></label>
+          <label class="wide">Email<input name="email" type="email" autocomplete="email"></label>
+          <label class="wide">Outlet *
+            <select name="outlet" required>
+              <option value="">Choose</option>
+              <option>J P Nagar</option>
+              <option>Whitefield</option>
+              <option>Yelahanka</option>
+            </select>
+          </label>
+          <label class="wide">Message *<textarea name="message" rows="5" required></textarea></label>
+          <button class="btn" type="submit">Send</button>
+        </form>
+        <div class="success" hidden></div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div><img src="images/logo.svg" alt="" width="64"><p>Byg Ventures LLP, Langford Road, Bengaluru 560025.</p></div>
+    <div><p class="footer-label">Plan</p><a href="corporate.html">Corporate parties</a><a href="careers.html">Careers</a></div>
+    <div><p class="footer-label">House notes</p><a href="disclaimer.html">Disclaimer</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+    <div><p class="footer-label">Social</p><a href="https://www.instagram.com/jollygunj/">Instagram</a><a href="https://www.facebook.com/701916579681205">Facebook</a></div>
+    <p class="legal-line">© <span data-year>2026</span> Jollygunj</p>
+  </footer>
+  <script src="js/site.js"></script>
+</body>
+</html>

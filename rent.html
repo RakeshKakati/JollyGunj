@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rent or lease a property — Jollygunj</title>
+  <meta name="description" content="Offer a property to Jollygunj. The bar is expanding across Bengaluru.">
+  <link rel="icon" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,640&family=Outfit:wght@380;520;580&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="rent">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="images/logo.svg" alt="Jollygunj"></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav">
+      <a href="index.html" data-page="home">Home</a>
+      <a href="menu.html" data-page="menu">The Menu</a>
+      <a href="corporate.html" data-page="corporate">Corporate Parties</a>
+      <a href="events.html" data-page="events">Events</a>
+      <a href="gallery.html" data-page="gallery">Gallery</a>
+      <a href="rent.html" data-page="rent">Rent/Lease</a>
+      <a href="contact.html" data-page="contact">Contact</a>
+    </nav>
+  </header>
+  <main id="main" class="section">
+    <div class="section-head">
+      <p class="eyebrow">Landlords</p>
+      <h2>Got a property in mind?</h2>
+      <p>Jollygunj is expanding. If the site can hold a bar — ceiling, access, a neighbourhood that stays out late — send the outline. If it fits, the team writes back.</p>
+    </div>
+    <div class="split">
+      <div class="panel">
+        <h3>What helps a first look</h3>
+        <ul>
+          <li>City and a precise locality</li>
+          <li>Carpet area, and whether it is ground, a floor, or a roof</li>
+          <li>Current use, and whether a trade licence conversation has started</li>
+          <li>A phone number that a person answers</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <form data-enquiry>
+          <p class="error" role="alert"></p>
+          <label class="wide">Name *<input name="name" required></label>
+          <label class="wide">Phone *<input name="phone" required inputmode="tel"></label>
+          <label class="wide">Email<input name="email" type="email"></label>
+          <label class="wide">City and locality *<input name="locality" required placeholder="Bengaluru — Indiranagar"></label>
+          <label class="wide">Carpet area<input name="area" placeholder="Square feet"></label>
+          <label class="wide">About the property *<textarea name="property" rows="5" required></textarea></label>
+          <button class="btn" type="submit">Submit property</button>
+        </form>
+        <div class="success" hidden></div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div><img src="images/logo.svg" alt="" width="64"><p>Byg Ventures LLP.</p></div>
+    <div><p class="footer-label">Visit</p><a href="contact.html">Contact</a></div>
+    <div><p class="footer-label">Plan</p><a href="corporate.html">Corporate parties</a><a href="careers.html">Careers</a></div>
+    <div><p class="footer-label">House notes</p><a href="disclaimer.html">Disclaimer</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+    <p class="legal-line">© <span data-year>2026</span> Jollygunj</p>
+  </footer>
+  <script src="js/site.js"></script>
+</body>
+</html>
