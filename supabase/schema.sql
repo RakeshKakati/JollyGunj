@@ -11,10 +11,19 @@ create table if not exists public.enquiries (
   attendees integer,
   locality text,
   area text,
+  owner_type text,
+  maps_url text,
+  floor text,
+  frontage text,
   message text,
   status text not null default 'new' check (status in ('new', 'in_progress', 'closed')),
   created_at timestamptz not null default now()
 );
+
+alter table public.enquiries add column if not exists owner_type text;
+alter table public.enquiries add column if not exists maps_url text;
+alter table public.enquiries add column if not exists floor text;
+alter table public.enquiries add column if not exists frontage text;
 
 alter table public.enquiries enable row level security;
 

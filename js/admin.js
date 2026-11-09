@@ -41,6 +41,10 @@ function payloadFrom(form) {
     attendees: data.attendees ? Number(data.attendees) : null,
     locality: blank(data.locality),
     area: blank(data.area),
+    owner_type: blank(data.owner_type),
+    maps_url: blank(data.maps_url),
+    floor: blank(data.floor),
+    frontage: blank(data.frontage),
     message: blank(data.message),
   };
 }
@@ -51,7 +55,7 @@ function paint() {
   rowsEl.replaceChildren(...visible.map((row) => {
     const tr = document.createElement("tr");
     const received = new Date(row.created_at).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
-    const about = [row.outlet, row.package, row.locality, row.message].filter(Boolean).join(" · ");
+    const about = [row.outlet, row.package, row.owner_type, row.floor, row.area && `${row.area} sq ft`, row.locality, row.message].filter(Boolean).join(" · ");
     tr.append(
       text("td", received),
       text("td", labels[row.form_type] || row.form_type),

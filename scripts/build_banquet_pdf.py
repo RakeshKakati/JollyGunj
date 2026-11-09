@@ -22,9 +22,9 @@ SANS = "/System/Library/Fonts/Supplemental/GillSans.ttc"
 def font(page, name, file):
     if file.endswith(".ttc"):
         face = pymupdf.Font(fontfile=file)
-        page.insert_font(fontname=name, fontbuffer=face.buffer)
+        page.insert_font(fontname=name, fontbuffer=face.buffer, set_simple=True)
     else:
-        page.insert_font(fontname=name, fontfile=file)
+        page.insert_font(fontname=name, fontfile=file, set_simple=True)
 
 
 def use(page):
@@ -98,7 +98,7 @@ def spirit_block(page, y, inner, title, columns, extras, food):
         page.insert_textbox(
             pymupdf.Rect(x, y, x + col_w, y + 14),
             head,
-            fontname="serifb",
+            fontname="sans",
             fontsize=10,
             color=INK,
             align=1,
@@ -191,17 +191,9 @@ def cover(doc):
     card = pymupdf.Rect(118, 390, W - 118, 540)
     page.draw_rect(card, color=CREAM, fill=CREAM)
     page.insert_textbox(
-        pymupdf.Rect(card.x0 + 24, card.y0 + 28, card.x1 - 24, card.y0 + 70),
-        "“",
-        fontname="serifb",
-        fontsize=36,
-        color=GOLD,
-        align=1,
-    )
-    page.insert_textbox(
-        pymupdf.Rect(card.x0 + 28, card.y0 + 78, card.x1 - 28, card.y1 - 24),
-        "A table is how Kolkata\nkeeps a night together.",
-        fontname="serif",
+        pymupdf.Rect(card.x0 + 22, card.y0 + 48, card.x1 - 22, card.y1 - 28),
+        "Unleashing the Spirit\nof the City of Joy",
+        fontname="sans",
         fontsize=16,
         color=PLUM,
         align=1,
@@ -233,7 +225,7 @@ def summary(doc):
     )
     simple_package(
         page, y, inner, "The Highball Package",
-        "Beer on the evening’s list, Mocktails, Canned Juice, Soft Drinks",
+        "Beer on the evening's list, Mocktails, Canned Juice, Soft Drinks",
         "3 Veg & 3 Non-Veg Starters, 3 Veg & 3 Non-Veg Main Course,\nAny 3 Among Salad & Staples, 3 Desserts & 1 Ice-Cream",
     )
 
@@ -263,7 +255,7 @@ def spirits_one(doc):
             ("Gin", ["Call gin"]),
             ("Wines", ["Domestic wines"]),
         ],
-        "Signature cocktails    ·    Beer on the evening’s list\nCanned juices, mocktails and soft drinks",
+        "Signature cocktails    ·    Beer on the evening's list\nCanned juices, mocktails and soft drinks",
         "4 Veg & 3 Non-Veg Starters, 4 Veg & 3 Non-Veg Main Course,\nAny 3 Among Salad & Staples, 3 Desserts & 1 Ice-Cream",
     )
 
@@ -282,7 +274,7 @@ def spirits_two(doc):
             ("Rum", ["Call rum"]),
             ("Wines", ["Imported wines", "Domestic wines"]),
         ],
-        "Signature cocktails    ·    Beer on the evening’s list\nCanned juices and mocktails",
+        "Signature cocktails    ·    Beer on the evening's list\nCanned juices and mocktails",
         "4 Veg & 4 Non-Veg Starters, 4 Veg & 4 Non-Veg Main Course,\nAny 4 Among Salad & Staples, 4 Desserts & 1 Ice-Cream",
     )
     y = spirit_block(
@@ -293,15 +285,15 @@ def spirits_two(doc):
             ("Gin", ["Premium gin"]),
             ("Wines", ["Imported wines", "Domestic wines"]),
         ],
-        "The full signature cocktail and shot card\nBeer on the evening’s list    ·    Canned juices, mocktails, soft drinks",
+        "The full signature cocktail and shot card\nBeer on the evening's list    ·    Canned juices, mocktails, soft drinks",
         "5 Veg & 5 Non-Veg Starters, 5 Veg & 5 Non-Veg Main Course,\nAny 4 Among Salad & Staples, 5 Desserts & 1 Ice-Cream",
     )
     note = pymupdf.Rect(inner.x0 + 8, y + 4, inner.x1 - 8, inner.y1 - 4)
-    page.insert_textbox(note, "Note", fontname="serifb", fontsize=13, color=INK, align=1)
+    page.insert_textbox(note, "Note", fontname="sans", fontsize=13, color=INK, align=1)
     page.insert_textbox(
         pymupdf.Rect(note.x0 + 8, note.y0 + 22, note.x1 - 8, note.y1),
         "Every sitting runs three hours. Choose the stated number of dishes from the card that follows.\n"
-        "The outlet confirms the evening’s bottles before the booking is held.\n"
+        "The outlet confirms the evening's bottles before the booking is held.\n"
         "One pork or seafood dish can sit inside the non-veg count. Anything beyond that is agreed with the kitchen.",
         fontname="sans",
         fontsize=9.5,
@@ -395,20 +387,20 @@ def last(doc):
     )
     bar(page, (inner.x0 + inner.x1) / 2, inner.y0 + 120, "Signature Shots", width=220)
     shots = [
-        ("Brine & Shine", "Pistola Rosa, three citrus foam"),
-        ("Studio Cut", "Tequila, passion fruit, grapefruit"),
-        ("Elgin Charge", "Vodka, lime, orgeat, orange litchi"),
-        ("Grand Trunk Drop", "Gin, lime, watermelon, apple juice"),
-        ("Red Tram 75", "Vodka, lime, peach, cranberry"),
-        ("Fizzy Feriwala", "Pistola Rosa, pineapple pickle brine"),
-        ("Bubble Trouble", "Beefeater gin, Skinos, tonic, mango bobas"),
+        ("Studio Cut", "Tequila + Passion fruit + Grapefruit"),
+        ("Elgin Charge", "Vodka + Lime + Orgeat + Orange Litchi"),
+        ("Grand Trunk Drop", "Gin + Lime + Watermelon + Apple Juice"),
+        ("Red Tram 75", "Vodka + Lime + Peach + Cranberry"),
+        ("Fizzy Feriwala", "Pistola Rosa + Pineapple Pickle Brine"),
+        ("Bubble Trouble", "Beefeater Gin + Skinos + Tonic water + Mango Bobas"),
+        ("Brine & Shine", "Pistola Rosa, Three citrus foam"),
     ]
     y = inner.y0 + 168
     for name, build in shots:
         page.insert_textbox(
             pymupdf.Rect(inner.x0 + 36, y, inner.x0 + 230, y + 16),
             name,
-            fontname="serifb",
+            fontname="sans",
             fontsize=11,
             color=INK,
             align=0,
@@ -426,7 +418,7 @@ def last(doc):
     bar(page, (inner.x0 + inner.x1) / 2, y, "Shot Platters", width=190)
     page.insert_textbox(
         pymupdf.Rect(inner.x0 + 30, y + 44, inner.x1 - 30, y + 110),
-        "Platters for 4, 8 and 10.\nBuilt for a round at the table, counted inside the package’s cocktail and shot list.",
+        "Platters for 4, 8 and 10.\nBuilt for a round at the table, counted inside the package's cocktail and shot list.",
         fontname="sans",
         fontsize=11,
         color=INK,

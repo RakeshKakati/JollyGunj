@@ -1,13 +1,13 @@
 const RESERVE = "https://widget.reservego.co/reserveBrands/6732094bdb478b447e780446?source=9";
 
 const SHOTS = [
-  { name: "Brine & Shine", note: "Pistola Rosa, three citrus foam", img: "images/shot-brine.webp", file: "Brine-Shine" },
-  { name: "Studio Cut", note: "Tequila, passion fruit, grapefruit", img: "images/shot-studio.webp" },
-  { name: "Elgin Charge", note: "Vodka, lime, orgeat, orange litchi", img: "images/shot-elgin.webp" },
-  { name: "Grand Trunk Drop", note: "Gin, lime, watermelon, apple juice", img: "images/shot-tram.webp" },
-  { name: "Red Tram 75", note: "Vodka, lime, peach, cranberry", img: "images/shot-red.webp" },
-  { name: "Fizzy Feriwala", note: "Pistola Rosa, pineapple pickle brine", img: "images/shot-fizzy.webp", file: "Fizzy-Feriwala" },
-  { name: "Bubble Trouble", note: "Beefeater gin, Skinos, tonic, mango bobas", img: "images/shot-bubble.webp", file: "Bubble-Trouble" }
+  { name: "Studio Cut", note: "Tequila + Passion fruit + Grapefruit", img: "images/shot-studio.webp" },
+  { name: "Elgin Charge", note: "Vodka + Lime + Orgeat + Orange Litchi", img: "images/shot-elgin.webp" },
+  { name: "Grand Trunk Drop", note: "Gin + Lime + Watermelon + Apple Juice", img: "images/shot-tram.webp" },
+  { name: "Red Tram 75", note: "Vodka + Lime + Peach + Cranberry", img: "images/shot-red.webp" },
+  { name: "Fizzy Feriwala", note: "Pistola Rosa + Pineapple Pickle Brine", img: "images/shot-fizzy.webp", file: "Fizzy-Feriwala" },
+  { name: "Bubble Trouble", note: "Beefeater Gin + Skinos + Tonic water + Mango Bobas", img: "images/shot-bubble.webp", file: "Bubble-Trouble" },
+  { name: "Brine & Shine", note: "Pistola Rosa, Three citrus foam", img: "images/shot-brine.webp", file: "Brine-Shine" }
 ];
 
 const COCKTAILS = [
@@ -129,12 +129,13 @@ function galleryItems() {
     { name: "J P Nagar tables", outlet: "jp", kind: "venue", img: "images/gallery/jolly-gunj-slided-2.webp" },
     { name: "J P Nagar night", outlet: "jp", kind: "venue", img: "images/gallery/Jolly-gunj-slide-3.webp" }
   ];
-  const drinks = [
-    ...SHOTS.filter((s) => s.file).map((s) => ({ name: s.name, outlet: "all", kind: "drinks", img: thumb(s.file) })),
-    ...COCKTAILS.map(([name, file]) => ({ name, outlet: "all", kind: "drinks", img: thumb(file) }))
+  const cocktails = COCKTAILS.map(([name, file]) => ({ name, outlet: "all", kind: "cocktails", img: thumb(file) }));
+  const shots = [
+    ...SHOTS.filter((s) => s.file).map((s) => ({ name: s.name, outlet: "all", kind: "shots", img: thumb(s.file) })),
+    ...FOOD.filter(([, , group]) => group === "Platters").map(([name, file]) => ({ name, outlet: "all", kind: "shots", img: thumb(file) }))
   ];
-  const kitchen = FOOD.map(([name, file]) => ({ name, outlet: "all", kind: "kitchen", img: thumb(file) }));
-  return [...venue, ...drinks, ...kitchen];
+  const food = FOOD.filter(([, , group]) => group !== "Platters").map(([name, file]) => ({ name, outlet: "all", kind: "food", img: thumb(file) }));
+  return [...cocktails, ...shots, ...food, ...venue];
 }
 
 function renderGallery() {
@@ -227,7 +228,11 @@ function bindForms() {
           attendees: data.attendees ? Number(data.attendees) : null,
           locality: blank(data.locality),
           area: blank(data.area),
-          message: blank(data.message || data.property),
+          owner_type: blank(data.owner_type),
+          maps_url: blank(data.maps_url),
+          floor: blank(data.floor),
+          frontage: blank(data.frontage),
+          message: blank(data.message),
           status: "new",
         }, { returning: "minimal" });
         if (insertError) throw insertError;

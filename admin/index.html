@@ -88,7 +88,24 @@
       <label>Time<input name="event_time"></label>
       <label>Attendees<input name="attendees" type="number" min="1"></label>
       <label>Locality<input name="locality"></label>
-      <label>Area<input name="area"></label>
+      <label>Total size (sq ft)<input name="area"></label>
+      <label>Agent or owner
+        <select name="owner_type">
+          <option value=""></option>
+          <option>Agent</option>
+          <option>Owner</option>
+        </select>
+      </label>
+      <label>Floor
+        <select name="floor">
+          <option value=""></option>
+          <option>Ground Floor</option>
+          <option>First Floor</option>
+          <option>Second Floor</option>
+        </select>
+      </label>
+      <label>Frontage (ft)<input name="frontage"></label>
+      <label>Google Maps URL<input name="maps_url" type="url"></label>
       <label class="wide">Message<textarea name="message" rows="4"></textarea></label>
       <div class="editor-actions">
         <button class="btn line" type="button" id="cancel-edit">Cancel</button>

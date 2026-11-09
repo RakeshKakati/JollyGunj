@@ -28,41 +28,43 @@
   </header>
   <main id="main" class="section">
     <div class="section-head">
-      <p class="eyebrow">Landlords</p>
-      <h2>Got a property in mind?</h2>
-      <p>Jollygunj is expanding. If the site can hold a bar — ceiling, access, a neighbourhood that stays out late — send the outline. If it fits, the team writes back.</p>
+      <h2>RENT/LEASE</h2>
+      <p>Got a property in mind? We’re expanding! If it fits, we’ll be in touch.</p>
     </div>
-    <div class="split">
-      <div class="panel">
-        <h3>What helps a first look</h3>
-        <ul>
-          <li>City and a precise locality</li>
-          <li>Carpet area, and whether it is ground, a floor, or a roof</li>
-          <li>Current use, and whether a trade licence conversation has started</li>
-          <li>A phone number that a person answers</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <form data-enquiry data-form="rent">
-          <p class="error" role="alert"></p>
-          <label class="wide">Name *<input name="name" required></label>
-          <label class="wide">Phone *<input name="phone" required inputmode="tel"></label>
-          <label class="wide">Email<input name="email" type="email"></label>
-          <label class="wide">City and locality *<input name="locality" required placeholder="Bengaluru — Indiranagar"></label>
-          <label class="wide">Carpet area<input name="area" placeholder="Square feet"></label>
-          <label class="wide">About the property *<textarea name="property" rows="5" required></textarea></label>
-          <button class="btn" type="submit">Submit property</button>
-        </form>
-        <div class="success" hidden></div>
-      </div>
+    <div class="panel rent-panel">
+      <form data-enquiry data-form="rent">
+        <p class="error" role="alert"></p>
+        <label>Contact Name (Required)<input name="name" required autocomplete="name" placeholder="Enter text"></label>
+        <label>Contact Number (Required)<input name="phone" required type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter number"></label>
+        <label>Email Address (Required)<input name="email" required type="email" autocomplete="email" placeholder="Enter text"></label>
+        <label>Are you an Agent or Owner? (Required)
+          <select name="owner_type" required>
+            <option>Agent</option>
+            <option>Owner</option>
+          </select>
+        </label>
+        <label class="wide">Location (Google Maps) URL<input name="maps_url" type="url" placeholder="Enter url"></label>
+        <label>Which Floor?
+          <select name="floor">
+            <option>Ground Floor</option>
+            <option>First Floor</option>
+            <option>Second Floor</option>
+          </select>
+        </label>
+        <label>Total Size (Sq Ft)<input name="area" placeholder="Enter Value"></label>
+        <label>Frontage Length (in Ft)<input name="frontage" placeholder="Enter Value"></label>
+        <label class="wide">Your Message<textarea name="message" rows="6" placeholder="Enter text"></textarea></label>
+        <button class="btn" type="submit">Submit</button>
+      </form>
+      <div class="success" hidden></div>
     </div>
   </main>
   <footer class="site-footer">
     <div><img src="images/logo.svg" alt="" width="64"><p>Byg Ventures LLP.</p></div>
     <div><p class="footer-label">Visit</p><a href="contact.html">Contact</a></div>
     <div><p class="footer-label">Plan</p><a href="corporate.html">Corporate parties</a><a href="careers.html">Careers</a></div>
-    <div><p class="footer-label">House notes</p><a href="disclaimer.html">Disclaimer</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
-    <p class="legal-line">© <span data-year>2026</span> Jollygunj</p>
+    <div><p class="footer-label">House notes</p><a href="disclaimer.html">Disclaimer</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
+    <p class="legal-line">Copyright © <span data-year>2026</span> All Rights Reserved</p>
   </footer>
   <script src="js/site.js"></script>
 </body>

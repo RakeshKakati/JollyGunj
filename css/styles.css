@@ -95,7 +95,7 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 560; letter-spacing: -0
   margin: 0 0 16px;
 }
 .hero h1 { font-size: clamp(46px, 5.6vw, 78px); max-width: 11ch; color: var(--gold); }
-.hero p.lede { font-size: 18px; max-width: 46ch; color: rgba(255,255,255,.9); }
+.hero p.lede { font-size: 18px; max-width: 62ch; color: rgba(255,255,255,.9); }
 .hero-photo { min-height: 420px; background: #1a0a12 center/cover no-repeat; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
 
@@ -372,6 +372,22 @@ dialog button { margin-top: 8px; }
 .address h3 { font-size: 30px; }
 .address p { margin: 6px 0; }
 .note { font-size: 14px; color: var(--muted); }
+
+.rent-panel { max-width: 760px; }
+.panel form[data-enquiry] input, .panel form[data-enquiry] select, .panel form[data-enquiry] textarea {
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+form[data-enquiry] button[type="submit"] { grid-column: 1 / -1; }
+
+.legal { max-width: 820px; }
+.legal h2 { font-size: clamp(28px, 3vw, 40px); margin: 36px 0 12px; }
+.legal h2:first-child { font-size: clamp(36px, 4vw, 58px); margin-top: 0; }
+.legal h3 { font-size: 22px; margin: 24px 0 8px; }
+.legal p, .legal li { color: var(--ink); font-size: 16px; line-height: 1.7; }
+.legal ul, .legal ol { padding-left: 22px; }
+.legal li { margin: 6px 0; }
+.legal a { color: var(--plum); overflow-wrap: anywhere; }
 
 .empty {
   border: 1px dashed rgba(36,16,24,.3);
