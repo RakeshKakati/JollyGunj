@@ -248,12 +248,42 @@ function bindForms() {
   });
 }
 
+function startCounters() {
+  const block = document.querySelector(".counter-block");
+  if (!block) return;
+  const numbers = [...block.querySelectorAll(".number")];
+  const labels = numbers.map((node) => node.textContent.trim());
+  const targets = labels.map(parseFloat);
+  const swing = (p) => 0.5 - Math.cos(p * Math.PI) / 2;
+  const run = () => {
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / 4000, 1);
+      numbers.forEach((node, i) => {
+        const value = targets[i] * swing(p);
+        node.textContent = Number.isInteger(targets[i]) ? Math.floor(value) : value.toFixed(1);
+      });
+      if (p < 1) requestAnimationFrame(tick);
+      else numbers.forEach((node, i) => { node.textContent = labels[i]; });
+    };
+    requestAnimationFrame(tick);
+  };
+  numbers.forEach((node) => { node.textContent = "0"; });
+  new IntersectionObserver((entries, observer) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      observer.disconnect();
+      run();
+    }
+  }, { threshold: 0.6 }).observe(block);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-year]").forEach((node) => { node.textContent = String(new Date().getFullYear()); });
   initNav();
   renderMenu();
   renderGallery();
   bindForms();
+  startCounters();
   document.querySelector("#lightbox")?.querySelector("button")?.addEventListener("click", () => {
     document.querySelector("#lightbox").close();
   });
