@@ -7,8 +7,8 @@
   <link rel="icon" href="../images/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@380;520&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/styles.css?v=20261109b">
+  <link rel="stylesheet" href="../css/admin.css?v=20261109b">
 </head>
 <body>
   <header class="site-header">
@@ -33,7 +33,10 @@
           <p class="eyebrow">Saved forms</p>
           <h2>Every enquiry</h2>
         </div>
-        <button class="btn" id="new-enquiry" type="button">New enquiry</button>
+        <div class="admin-actions">
+          <button class="btn line" id="download-csv" type="button">Download CSV</button>
+          <button class="btn" id="new-enquiry" type="button">New enquiry</button>
+        </div>
       </div>
       <div class="filters" id="type-filters">
         <button type="button" data-type="all" aria-pressed="true">All</button>
@@ -59,6 +62,19 @@
         </table>
       </div>
       <p class="empty" id="empty" hidden>No enquiries in this view.</p>
+
+      <section class="panel admins-panel" aria-labelledby="admins-title">
+        <p class="eyebrow">Access</p>
+        <h3 id="admins-title">Admins</h3>
+        <p class="error" id="admins-error" role="alert"></p>
+        <ul class="admin-list" id="admin-list"></ul>
+        <form id="add-admin-form" class="add-admin">
+          <label>Email<input name="email" type="email" autocomplete="off" required></label>
+          <label>Password<input name="password" type="password" autocomplete="new-password" minlength="8" placeholder="Min 8 characters, new logins only"></label>
+          <button class="btn" type="submit">Add admin</button>
+        </form>
+        <p class="note" id="admins-note"></p>
+      </section>
     </section>
   </main>
   <dialog id="editor">
@@ -113,6 +129,6 @@
       </div>
     </form>
   </dialog>
-  <script type="module" src="../js/admin.js"></script>
+  <script type="module" src="../js/admin.js?v=20261109b"></script>
 </body>
 </html>

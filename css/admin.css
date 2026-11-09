@@ -60,4 +60,19 @@ td { font-size: 15px; }
 #editor-form { margin: 0; display: grid; grid-template-columns: 1fr 1fr; }
 #editor-form h3, #editor-form .error, #editor-form .wide, #editor-form .editor-actions { grid-column: 1 / -1; }
 .editor-actions { display: flex; justify-content: flex-end; gap: 8px; }
-#desk-error:empty, #login-error:empty, #editor-error:empty { display: none; }
+#desk-error:empty, #login-error:empty, #editor-error:empty, #admins-error:empty, #admins-note:empty { display: none; }
+.admin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.admins-panel { margin-top: 32px; }
+.admins-panel h3 { font-size: 32px; margin: 4px 0 12px; }
+.admin-list { list-style: none; padding: 0; margin: 0 0 20px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+.admin-list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+.admin-list li:last-child { border-bottom: 0; }
+.admin-list .you { color: var(--muted); font-size: 13px; }
+.admin-list button { border: 1px solid var(--line); background: white; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.add-admin { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end; }
+.add-admin label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.add-admin input { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: var(--paper); color: var(--ink); }
+@media (max-width: 720px) {
+  .add-admin { grid-template-columns: 1fr; }
+  .admin-bar { flex-direction: column; align-items: start; }
+}

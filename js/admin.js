@@ -13,9 +13,21 @@ const deskError = document.querySelector("#desk-error");
 const editor = document.querySelector("#editor");
 const editorForm = document.querySelector("#editor-form");
 const editorError = document.querySelector("#editor-error");
+const adminList = document.querySelector("#admin-list");
+const adminsError = document.querySelector("#admins-error");
+const adminsNote = document.querySelector("#admins-note");
 let records = [];
 let filter = "all";
 let editingId = null;
+let myEmail = "";
+
+const csvColumns = [
+  ["created_at", "Received"], ["form_type", "Form"], ["status", "Status"], ["name", "Name"],
+  ["phone", "Phone"], ["email", "Email"], ["outlet", "Outlet"], ["package", "Package"],
+  ["event_date", "Event date"], ["event_time", "Event time"], ["attendees", "Attendees"],
+  ["locality", "Locality"], ["area", "Area (sq ft)"], ["owner_type", "Agent or owner"],
+  ["floor", "Floor"], ["frontage", "Frontage (ft)"], ["maps_url", "Google Maps URL"], ["message", "Message"],
+];
 
 const labels = { corporate: "Corporate", contact: "Contact", rent: "Rent", new: "New", in_progress: "In progress", closed: "Closed" };
 
@@ -107,11 +119,79 @@ async function load() {
   paint();
 }
 
-function showDesk(signedIn) {
+function csvCell(value) {
+  let cell = value == null ? "" : String(value);
+  // Spreadsheets run cells that start with these characters as formulas.
+  if (/^[=@\t\r]/.test(cell) || /^[+-][^\d\s]/.test(cell)) cell = `'${cell}`;
+  return /[",\n\r]/.test(cell) ? `"${cell.replace(/"/g, '""')}"` : cell;
+}
+
+function downloadCsv() {
+  const visible = records.filter((row) => filter === "all" || row.form_type === filter);
+  const lines = [csvColumns.map(([, label]) => csvCell(label)).join(",")];
+  visible.forEach((row) => {
+    lines.push(csvColumns.map(([key]) => {
+      if (key === "created_at") return csvCell(new Date(row.created_at).toLocaleString("en-IN"));
+      if (key === "form_type" || key === "status") return csvCell(labels[row[key]] || row[key]);
+      return csvCell(row[key]);
+    }).join(","));
+  });
+  const blob = new Blob(["\ufeff" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `jollygunj-leads-${filter}-${new Date().toISOString().slice(0, 10)}.csv`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+async function loadAdmins() {
+  adminsError.textContent = "";
+  const { data, error } = await supabase.from("admins").select("email, created_at").order("created_at");
+  if (error) {
+    adminsError.textContent = "Couldn't load admins.";
+    return;
+  }
+  adminList.replaceChildren(...data.map(({ email }) => {
+    const li = document.createElement("li");
+    li.append(text("span", email));
+    if (email.toLowerCase() === myEmail) {
+      const you = text("span", "You");
+      you.className = "you";
+      li.append(you);
+    } else {
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "Remove";
+      remove.addEventListener("click", () => removeAdmin(email));
+      li.append(remove);
+    }
+    return li;
+  }));
+}
+
+async function removeAdmin(email) {
+  if (!confirm(`Remove ${email}? Their login will be deleted.`)) return;
+  adminsError.textContent = "";
+  adminsNote.textContent = "";
+  const { error } = await supabase.rpc("remove_admin", { p_email: email });
+  if (error) {
+    adminsError.textContent = error.message === "you cannot remove yourself" ? "You can't remove yourself." : "Couldn't remove that admin.";
+    return;
+  }
+  adminsNote.textContent = `${email} removed.`;
+  await loadAdmins();
+}
+
+function showDesk(session) {
+  const signedIn = Boolean(session);
+  myEmail = (session?.user?.email || "").toLowerCase();
   login.hidden = signedIn;
   desk.hidden = !signedIn;
   document.querySelector("#sign-out").hidden = !signedIn;
-  if (signedIn) load();
+  if (signedIn) {
+    load();
+    loadAdmins();
+  }
 }
 
 function openEditor(row) {
@@ -190,5 +270,33 @@ editorForm.addEventListener("submit", async (event) => {
   await load();
 });
 
-supabase.auth.onAuthStateChange((_event, session) => showDesk(Boolean(session)));
-supabase.auth.getSession().then(({ data }) => showDesk(Boolean(data.session)));
+document.querySelector("#download-csv").addEventListener("click", downloadCsv);
+
+document.querySelector("#add-admin-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const button = form.querySelector("button");
+  adminsError.textContent = "";
+  adminsNote.textContent = "";
+  const data = Object.fromEntries(new FormData(form).entries());
+  const email = data.email.trim().toLowerCase();
+  button.disabled = true;
+  const { data: result, error } = await supabase.rpc("add_admin", { p_email: email, p_password: data.password || null });
+  button.disabled = false;
+  if (error) {
+    const messages = {
+      "invalid email": "That email doesn't look right.",
+      "password must be at least 8 characters": "New logins need a password of at least 8 characters.",
+    };
+    adminsError.textContent = messages[error.message] || "Couldn't add that admin.";
+    return;
+  }
+  form.reset();
+  adminsNote.textContent = result === "created"
+    ? `${email} can now sign in with the password you set.`
+    : `${email} already had a login and is now an admin. Their password is unchanged.`;
+  await loadAdmins();
+});
+
+supabase.auth.onAuthStateChange((_event, session) => showDesk(session));
+supabase.auth.getSession().then(({ data }) => showDesk(data.session));
