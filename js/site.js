@@ -173,24 +173,6 @@ function renderGallery() {
   paint();
 }
 
-function downloadPackages() {
-  const blocks = [...document.querySelectorAll("[data-package]")];
-  const lines = ["Jollygunj — The Joy Bundle", "Three-hour corporate and celebration sittings", ""];
-  blocks.forEach((block) => {
-    lines.push(block.dataset.package.toUpperCase());
-    lines.push(block.innerText.replace(/\n{2,}/g, "\n").trim());
-    lines.push("");
-  });
-  lines.push("Enquire at the outlet. A submitted form is a request, not a held table.");
-  const blob = new Blob([lines.join("\n")], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "jollygunj-joy-bundle.txt";
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
 function bindForms() {
   document.querySelectorAll("form[data-enquiry]").forEach((form) => {
     form.addEventListener("submit", (event) => {
@@ -232,8 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMenu();
   renderGallery();
   bindForms();
-  const download = document.querySelector("#download-packages");
-  if (download) download.addEventListener("click", downloadPackages);
   document.querySelector("#lightbox")?.querySelector("button")?.addEventListener("click", () => {
     document.querySelector("#lightbox").close();
   });
